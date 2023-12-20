@@ -1,2 +1,2 @@
-# web_dev_bootcamp
-This repository contains my projects from the Udemy course: The Complete 2023 Web Development Bootcamp
+# Portfolio
+This repository tracks my making of the portfolio
