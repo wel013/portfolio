@@ -1,0 +1,10 @@
+/* Custom CSS to change the background and text color of the navbar */
+.navbar-custom {
+    background-color: #1B4242;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+    color: #fff;
+    /* Change this to your desired text color */
+}
