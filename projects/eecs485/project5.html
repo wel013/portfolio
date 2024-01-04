@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>EECS485 Project5</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles/project_specific.css">
+</head>
+<!--TODO: NEED TO ADD MARGINS N MAKE IT MORE READABLE-->
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar bg-dark border-bottom border-body navbar-expand-lg navbar-custom" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Wenqian's Page</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Projects</a>
+                    <a class="nav-link" href="#">Self Directed Learning</a>
+                    <a class="nav-link" href="#">Interests</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Project 5: Scalable Search Engine Development
+    </h1>
+    <hr class="left-aligned-hr">
+    <div>
+        <h4>Overview</h4>
+        <hr class="left-aligned-hr">
+
+        <p>Developed a scalable search engine akin to Google or Bing, employing a segmented inverted index of web pages
+            utilising a
+            pipeline of MapReduce programs. The project involved building an Index server with a REST API for search
+            results
+            retrieval and a Search server for a user-friendly search interface.
+        </p>
+    </div>
+    <div>
+        <h4>Key Components</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>
+                Inverted Index Construction: Developed a pipeline of MapReduce programs to create a segmented inverted
+                index from a
+                subset of Wikipedia pages. Integrated text analysis (tf-idf) and link analysis (PageRank) concepts into
+                the indexing
+                process.
+            </li>
+            <li>
+                Index Server - REST API: Created an Index server as a REST API application capable of delivering search
+                results in JSON
+                format. Multiple Index servers handled different segments of the inverted index.
+            </li>
+            <li>
+                Search Server - User Interface: Developed a Search server with a user-friendly interface resembling
+                Google or Bing. The
+                server returned search results in HTML format, aggregating data from multiple Index server segments
+                through parallel
+                REST API calls.
+            </li>
+        </ul>
+    </div>
+
+
+    <div>
+        <!--FIXME: just think about better achievements-->
+        <h4>Achievements</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>Information Retrieval Techniques: Acquired expertise in text analysis (tf-idf) and link analysis
+                (PageRank), fundamental
+                for efficient information retrieval systems.
+            </li>
+            <li>
+                Parallel Data Processing: Demonstrated proficiency in employing MapReduce for parallel data processing,
+                significantly
+                enhancing indexing and search performance.
+            </li>
+            <li>Service-Oriented Architecture (SOA): Successfully designed and implemented an SOA for scaling dynamic
+                web pages and
+                search functionalities, gaining valuable experience in architecting distributed systems.
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <h4>Technologies & Skills:</h4>
+        <hr class="left-aligned-hr">
+        <p>Python, MapReduce, tf-idf, PageRank.
+        </p>
+    </div>
+
+    <div>
+        <h4>Links</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>Course Syllabus:
+            </li>
+            <li>Project Spec:
+            </li>
+        </ul>
+    </div>
+    <p>Due to honor code and confidentiality agreements, I am unable to showcase specific code publicly. For further
+        details or
+        inquiries regarding my work, please feel free to reach out to me via email. Thank you for your understanding and
+        interest.</p>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

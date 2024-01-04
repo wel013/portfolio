@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>EECS485 Project4</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles/project_specific.css">
+</head>
+<!--TODO: NEED TO ADD MARGINS N MAKE IT MORE READABLE-->
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar bg-dark border-bottom border-body navbar-expand-lg navbar-custom" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Wenqian's Page</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Projects</a>
+                    <a class="nav-link" href="#">Self Directed Learning</a>
+                    <a class="nav-link" href="#">Interests</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Project 4: MapReduce Framework Implementation
+    </h1>
+    <hr class="left-aligned-hr">
+    <div>
+        <h4>Overview</h4>
+        <hr class="left-aligned-hr">
+
+        <p>Implemented a custom MapReduce framework in Python, mirroring Google's MapReduce paper. This framework
+            enables the
+            execution of MapReduce programs through distributed processing on a cluster of computers, such as AWS EMR.
+        </p>
+    </div>
+    <div>
+        <h4>Key Components</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>
+                Worker Registration and Management:
+                <ul>
+                    <li>
+                        Manager tracks available Workers for distributing tasks among ready Workers.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Job Execution and Management:
+                <ul>
+                    <li>
+                        New job requests are received by the Manager and added to the queue.
+                        Manager executes jobs in sequence and waits until completion before initiating the next job.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Input Partitioning and Mapping:
+                <ul>
+                    <li>
+                        Manager scans input directories, dividing files into partitions.
+                    </li>
+                    <li>
+                        Mapping tasks are assigned to Workers, managing tasks' order based on Worker availability.
+                    </li>
+                    <li>
+                        Workers execute map executables on specified input files, sort output, and share temporary data
+                        with the Manager.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Reducing and Output Processing:
+                <ul>
+                    <li>
+                        Reduce tasks are allocated to Workers during the Reduce Stage, ordered by registration time.
+                    </li>
+                    <li>
+                        Workers merge and process input files, running reduce executables and storing output in the
+                        final directory specified by
+                        the Manager.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Fault Tolerance:
+                <ul>
+                    <li>
+                        Mechanism to handle Worker failures: If a Worker fails to respond for a defined period, reassign
+                        its pending work to
+                        another available Worker.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <div>
+        <!--FIXME: just think about better achievements-->
+        <h4>Achievements</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>Framework Development: Engineered a robust MapReduce framework from scratch in Python, adhering to
+                Google's original
+                MapReduce concepts. The framework facilitated the execution of MapReduce programs, demonstrating
+                proficiency in
+                distributed computing paradigms.
+            </li>
+            <li>
+                Fault-Tolerant Design: Implemented fault tolerance mechanisms to handle Worker failures within the
+                distributed system.
+                The framework dynamically reassigned pending tasks if Workers became unresponsive, ensuring
+                uninterrupted job execution.
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <h4>Technologies & Skills:</h4>
+        <hr class="left-aligned-hr">
+        <p>Python, MapReduce, distributed systems, fault tolerance, concurrency (threads and processes) and Network
+            Communication (sockets).
+        </p>
+    </div>
+
+    <div>
+        <h4>Links</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>Course Syllabus:
+            </li>
+            <li>Project Spec:
+            </li>
+        </ul>
+    </div>
+    <p>Due to honor code and confidentiality agreements, I am unable to showcase specific code publicly. For further
+        details or
+        inquiries regarding my work, please feel free to reach out to me via email. Thank you for your understanding and
+        interest.</p>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
