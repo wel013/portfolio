@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>EECS390 Project5</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles/project_specific.css">
+</head>
+<!--TODO: NEED TO ADD MARGINS N MAKE IT MORE READABLE-->
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar bg-dark border-bottom border-body navbar-expand-lg navbar-custom" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Wenqian's Page</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Projects</a>
+                    <a class="nav-link" href="#">Self Directed Learning</a>
+                    <a class="nav-link" href="#">Interests</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Project 5: Code Generation for uC Language in C++
+    </h1>
+    <h5>uC language is a language developped by the professcor of this class for the use in this class.</h5>
+    <hr class="left-aligned-hr">
+    <div>
+        <h4>Overview</h4>
+        <hr class="left-aligned-hr">
+
+        <p>The focus of this project was to implement a code generator for the uC language, a small language within the
+            C family,
+            to generate C++ code. The primary goals were to grasp metaprogramming concepts, understand language
+            translation
+            processes, and gain proficiency in using macros and templates. Additionally, it aimed to provide experience
+            in working
+            with a complex codebase, particularly dealing with code written by someone else.
+        </p>
+    </div>
+    <div>
+        <h4>Key Components</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>
+                Phase 1: Generating Type Declarations: The initial step involved generating forward declarations for
+                user-defined types
+                and functions in order to support usage before definition, adhering to the semantics of uC.
+                Prioritization was given to
+                forward declarations of types preceding those of functions.
+            </li>
+            <li>
+                Phase 2: Generating Function Declarations: This phase focused on generating forward declarations
+                specifically for
+                user-defined functions.
+            </li>
+            <li>
+                Phase 3: Generating Type Definitions: Following the order constraints in C++, this phase concentrated on
+                generating full
+                definitions for each user-defined type. This ensured that the type contents were accessible before
+                function definitions.
+            </li>
+            <li>
+                Phase 4: Generating Function Definitions: Subsequently, full definitions for each user-defined function
+                were generated,
+                marking the completion of the code generation process for function implementations.
+            </li>
+            <li>
+                Phase 5: Polymorphic Operations: The final phase aimed to implement operations involving polymorphism,
+                specifically the
+                addition of two items. Due to the absence of type computation from a prior project, reliance was placed
+                on the target
+                C++ compiler to resolve these operations.
+        </ul>
+    </div>
+
+
+    <div>
+        <h4>Achievements</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>Successfully implemented a code generator for uC language constructs, including type declarations,
+                function
+                declarations, type definitions, and function definitions.
+            </li>
+            <li>
+                Demonstrated the application of macros, templates, and language translation techniques in generating C++
+                code from the
+                uC language.
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <h4>Technologies & Skills:</h4>
+        <hr class="left-aligned-hr">
+        <p>Python, Metaprogramming, Code Base Navigation.
+        </p>
+    </div>
+
+    <div>
+        <h4>Links</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>Course Syllabus:
+            </li>
+            <li>Project Spec:
+            </li>
+        </ul>
+    </div>
+    <p>Due to honor code and confidentiality agreements, I am unable to showcase specific code publicly. For further
+        details or
+        inquiries regarding my work, please feel free to reach out to me via email. Thank you for your understanding and
+        interest.</p>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
