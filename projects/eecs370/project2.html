@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>EECS370 Project2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles/project_specific.css">
+</head>
+<!--TODO: NEED TO ADD MARGINS N MAKE IT MORE READABLE-->
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar bg-dark border-bottom border-body navbar-expand-lg navbar-custom" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Wenqian's Page</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Projects</a>
+                    <a class="nav-link" href="#">Self Directed Learning</a>
+                    <a class="nav-link" href="#">Interests</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Project 2: LC-2K Pipelined Behavioral Simulator
+    </h1>
+    <hr class="left-aligned-hr">
+    <div>
+        <h4>Overview</h4>
+        <hr class="left-aligned-hr">
+
+        <p>Developed a cycle-accurate behavioral simulator for a pipelined implementation of the LC-2K architecture. The
+            objective
+            was to understand and implement pipelining concepts along with data forwarding, branch prediction, and
+            handling various
+            hazards.
+        </p>
+    </div>
+    <div>
+        <h4>Key Components</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>
+                Cycle-Accurate Behavioral Simulator: Created a detailed simulator for a pipelined LC-2K implementation,
+                incorporating
+                data forwarding and branch prediction mechanisms.
+            </li>
+            <li>
+                Handling Data Hazards: Managed two types of data hazards:
+                <ul>
+                    <li>
+                        Data hazards resolved through data forwarding without stalling the pipeline.
+                    </li>
+                    <li>
+                        Data hazards causing stalls in the pipeline while ensuring data forwarding.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Control Hazard and Branch Prediction: Implemented branch prediction by speculating branch-not-taken,
+                deciding branch
+                outcomes during the MEM stage, and discarding incorrect predictions.
+            </li>
+        </ul>
+    </div>
+
+
+    <div>
+        <h4>Achievements</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>Successfully developed a cycle-accurate behavioral simulator demonstrating pipelined LC-2K execution
+                with data
+                forwarding and branch prediction.
+            </li>
+            <li>
+                Gained hands-on experience in identifying, managing, and resolving various hazards encountered in
+                pipelined
+                architectures.
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <h4>Technologies & Skills:</h4>
+        <hr class="left-aligned-hr">
+        <p>C, assembly language, data pipeline.
+        </p>
+    </div>
+
+    <div>
+        <h4>Links</h4>
+        <hr class="left-aligned-hr">
+        <ul>
+            <li>Course Syllabus:
+            </li>
+            <li>Project Spec:
+            </li>
+        </ul>
+    </div>
+    <p>Due to honor code and confidentiality agreements, I am unable to showcase specific code publicly. For further
+        details or
+        inquiries regarding my work, please feel free to reach out to me via email. Thank you for your understanding and
+        interest.</p>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
