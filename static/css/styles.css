@@ -13045,6 +13045,7 @@ body {
 
 .footer {
   padding: 5rem 0;
+<<<<<<< HEAD
 }
 
 
@@ -13084,4 +13085,6 @@ body {
   .post-preview>a>.post-title {
     font-size: 2.25rem;
   }
+=======
+>>>>>>> df2dcbf4121471f16ff47389c571ac33e047bc46
 }
