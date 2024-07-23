@@ -1,13 +1,12 @@
-Photo by <a href="https://unsplash.com/@boliviainteligente?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">BoliviaInteligente</a> on <a href="https://unsplash.com/photos/a-colorful-abstract-background-with-wavy-lines-TFdUQaIjV6s?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 
-Colors: 
-https://colorhunt.co/palette/0926351b42425c83749ec8b9
-
+Image Sources: 
 About image: Photo by Rod Sot on Unsplash
 https://startbootstrap.com/theme/grayscale
+Photo by <a href="https://unsplash.com/@boliviainteligente?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">BoliviaInteligente</a> on <a href="https://unsplash.com/photos/a-colorful-abstract-background-with-wavy-lines-TFdUQaIjV6s?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 
 
-SVG: font awsome
+SVG Sources
+: font awsome
 https://icons8.com/icons/set/c-programming
 
 https://icons8.com/icons/set/pandas-library
