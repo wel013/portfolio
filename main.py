@@ -1,7 +1,6 @@
 from datetime import datetime
-from flask import Flask, abort, render_template, redirect, url_for, flash
+from flask import Flask, abort, render_template, redirect, url_for, flash, send_from_directory
 from datetime import date
-from flask import Flask, abort, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
 from flask_gravatar import Gravatar
@@ -111,6 +110,26 @@ def show_post(post_id):
     # comments = db.session.execute(db.select(Comment).where(
     # Comment.post_id == post_id)).scalars()
     return render_template("post.html", post=requested_post)
+
+
+@app.route('/resume')
+def resume():
+    return render_template('resume.html')
+
+
+@app.route('/download')
+def download():
+    # if not current_user.is_authenticated:
+    #     return app.login_manager.unauthorized()
+    file_path = app.static_folder + "/files"
+    # print(f"Serving file from: {file_path}")
+    return send_from_directory(file_path,
+                               "Resume_Wenqian_2024.pdf")
+
+
+@app.route('/skills')
+def skills():
+    return render_template('technicalskill.html')
 
 
 if __name__ == '__main__':

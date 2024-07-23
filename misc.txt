@@ -5,3 +5,15 @@ https://colorhunt.co/palette/0926351b42425c83749ec8b9
 
 About image: Photo by Rod Sot on Unsplash
 https://startbootstrap.com/theme/grayscale
+
+
+SVG: font awsome
+https://icons8.com/icons/set/c-programming
+
+https://icons8.com/icons/set/pandas-library
+
+https://icons8.com/icon/set/logos/color
+
+https://www.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-flat.svg
+
+https://techicons.dev/icons/sqlalchemy
