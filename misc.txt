@@ -2,6 +2,7 @@ Used to track outside sources used:
 Templates and inspirations: 
 https://startbootstrap.com/previews/grayscale
 https://startbootstrap.com/theme/resume
+
 Image Sources: 
 About image: Photo by Rod Sot on Unsplash
 https://startbootstrap.com/theme/grayscale
