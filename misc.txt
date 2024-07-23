@@ -17,3 +17,5 @@ https://icons8.com/icon/set/logos/color
 https://www.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-flat.svg
 
 https://techicons.dev/icons/sqlalchemy
+post sample image
+https://images.unsplash.com/photo-1708162665956-98da095550ea?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
