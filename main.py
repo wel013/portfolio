@@ -43,6 +43,30 @@ class BlogPost(db.Model):
     # author = relationship("User", back_populates='posts')
 
 
+class Projects(db.Model):
+    __tablename__ = "projects"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    title: Mapped[str] = mapped_column(
+        String(250), unique=True, nullable=False)
+    category: Mapped[str] = mapped_column(
+        String(250), unique=True, nullable=False)
+    course_name: Mapped[str] = mapped_column(
+        String(250), unique=True, nullable=False)
+    result_link: Mapped[str] = mapped_column(
+        String(500), unique=True, nullable=False)
+    overview: Mapped[str] = mapped_column(
+        String(500), unique=True, nullable=False)
+    key_components: Mapped[str] = mapped_column(Text, nullable=False)
+    achievements: Mapped[str] = mapped_column(Text, nullable=False)
+    skill_tags: Mapped[str] = mapped_column(Text, nullable=False)
+    course_url: Mapped[str] = mapped_column(String(500), nullable=False)
+    img_url: Mapped[str] = mapped_column(String(250), nullable=False)
+    # # foreign table.field
+    # author_id: Mapped[int] = mapped_column(
+    #     Integer, ForeignKey('users.id'))
+    # author = relationship("User", back_populates='posts')
+
+
 # Define a function to create a mock post
 
 def create_mock_post():
@@ -130,6 +154,20 @@ def download():
 @app.route('/skills')
 def skills():
     return render_template('technicalskill.html')
+
+
+@app.route('/view-project/<category>', methods=["GET", "POST"])
+def view_project(category):
+    # result = db.session.execute(db.select(Projects).where(
+    #     Projects.category == category)).scalars().all()
+    # return render_template("viewproject.html", projects=result, category=category)
+    return render_template("viewproject.html", category=category)
+
+
+@app.route('/project/<int:id>', methods=["GET", "POST"])
+def project(id):
+    requested_post = db.get_or_404(Projects, id)
+    return render_template("project.html", project=requested_post)
 
 
 if __name__ == '__main__':
