@@ -61,6 +61,32 @@ class Projects(db.Model):
     skill_tags: Mapped[str] = mapped_column(Text, nullable=False)
     course_url: Mapped[str] = mapped_column(String(500), nullable=False)
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
+    course_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey('courses.id'), nullable=False)
+
+    course = relationship("Courses", back_populates="projects")
+    # # foreign table.field
+    # author_id: Mapped[int] = mapped_column(
+    #     Integer, ForeignKey('users.id'))
+    # author = relationship("User", back_populates='posts')
+
+
+class Courses(db.Model):
+    __tablename__ = "courses"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    title: Mapped[str] = mapped_column(
+        String(250), unique=True, nullable=False)
+    category: Mapped[str] = mapped_column(
+        String(250), unique=True, nullable=False)
+    course_name: Mapped[str] = mapped_column(
+        String(250), unique=True, nullable=False)
+    overview: Mapped[str] = mapped_column(
+        String(500), unique=True, nullable=False)
+    skill_tags: Mapped[str] = mapped_column(Text, nullable=False)
+    course_url: Mapped[str] = mapped_column(String(500), nullable=False)
+    img_url: Mapped[str] = mapped_column(String(250), nullable=False)
+    projects = relationship(
+        "Projects", back_populates="course", cascade="all, delete-orphan")
     # # foreign table.field
     # author_id: Mapped[int] = mapped_column(
     #     Integer, ForeignKey('users.id'))
@@ -154,6 +180,14 @@ def download():
 @app.route('/skills')
 def skills():
     return render_template('technicalskill.html')
+
+
+@app.route('/view-course-project/<int:id>', methods=["GET", "POST"])
+def view_project(id):
+    requested_course = db.get_or_404(Courses, id)
+    projects = db.session.execute(db.select(Projects).where(
+        Projects.course_id == id)).scalars().all()
+    return render_template("coursespecific.html", course=requested_course, projects=projects)
 
 
 @app.route('/view-project/<category>', methods=["GET", "POST"])
