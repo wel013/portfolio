@@ -25,3 +25,7 @@ https://images.unsplash.com/photo-1708162665956-98da095550ea?q=80&w=1974&auto=fo
 
 In diff-project I want to try to put projects: 
 Self Project -> List all the projects -> indiv projects
+
+Future: 
+need to add a form a insert project/courses; and make sure to not mess up the relationships in the db
+make sure only me (admin) who can log in and then to create project/course entries (other people only view)
