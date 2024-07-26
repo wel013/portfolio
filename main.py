@@ -11,7 +11,7 @@ from sqlalchemy import Integer, String, Text, ForeignKey
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 # Import your forms from the forms.py
-# from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
+from forms import CreateProjectForm
 import hashlib
 from urllib.parse import urlencode
 import os
@@ -25,6 +25,35 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///posts.db"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
+ckeditor = CKEditor(app)
+Bootstrap5(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.get_or_404(User, user_id)
+
+
+def admin_only(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        if current_user.id == 1:
+            return f(*args, **kwargs)
+        else:
+            return abort(403)
+    return wrapped
+
+
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(
+        String(100), unique=True, nullable=False)
+    email: Mapped[str] = mapped_column(
+        String(100), nullable=False, unique=True)
+    password: Mapped[str] = mapped_column(String(1000), nullable=False)
 
 
 class BlogPost(db.Model):
@@ -95,16 +124,16 @@ class Courses(db.Model):
 
 # Define a function to create a mock post
 
-def create_mock_post():
-    mock_post = BlogPost(
-        title="Sample Blog Post1",
-        topic="meditation",
-        date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        body="This is a sample blog post for testing purposes.11111111111111",
-        author="Wenqian",
-        img_url="https://images.unsplash.com/photo-1708162665956-98da095550ea?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    )
-    return mock_post
+# def create_mock_post():
+#     mock_post = BlogPost(
+#         title="Sample Blog Post1",
+#         topic="meditation",
+#         date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#         body="This is a sample blog post for testing purposes.11111111111111",
+#         author="Wenqian",
+#         img_url="https://images.unsplash.com/photo-1708162665956-98da095550ea?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+#     )
+#     return mock_post
 
 
 with app.app_context():
@@ -126,7 +155,9 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    # return render_template('index.html', current_user_id=current_user.id)
+    # todo: change later for testing purpose only
+    return render_template('index.html', current_user_id=2)
 
 
 @app.route('/contact')
@@ -183,7 +214,7 @@ def skills():
 
 
 @app.route('/view-course-project/<int:id>', methods=["GET", "POST"])
-def view_project(id):
+def view_course(id):
     requested_course = db.get_or_404(Courses, id)
     projects = db.session.execute(db.select(Projects).where(
         Projects.course_id == id)).scalars().all()
@@ -202,6 +233,30 @@ def view_project(category):
 def project(id):
     requested_post = db.get_or_404(Projects, id)
     return render_template("project.html", project=requested_post)
+
+
+@app.route("/new-project", methods=["GET", "POST"])
+@admin_only
+def add_new_project():
+
+    form = CreateProjectForm()
+    if form.validate_on_submit():
+        new_proj = Projects(
+            title=form.title.data,
+            category=form.category.data,
+            course_name=form.course_name.data,
+            result_link=form.result_link.data,
+            overview=form.overview.data,
+            key_components=form.key_components.data,
+            achievements=form.achievements.data,
+            skill_tags=form.skill_tags.data,
+            course_url=form.course_url.data,
+            img_url=form.img_url.data
+        )
+        db.session.add(new_proj)
+        db.session.commit()
+        # return redirect(url_for("get_all_posts"))
+    return render_template("make-post.html", form=form, logged_in=current_user.is_authenticated)
 
 
 if __name__ == '__main__':
