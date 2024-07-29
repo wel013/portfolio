@@ -11,7 +11,7 @@ from sqlalchemy import Integer, String, Text, ForeignKey
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 # Import your forms from the forms.py
-from forms import CreateProjectForm
+# from forms import CreateProjectForm, LoginForm, CreateCourseForm
 import hashlib
 from urllib.parse import urlencode
 import os
@@ -23,6 +23,7 @@ class Base(DeclarativeBase):
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///posts.db"
+app.config['SECRET_KEY'] = "SECRET_KEY"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 ckeditor = CKEditor(app)
@@ -54,6 +55,13 @@ class User(UserMixin, db.Model):
     email: Mapped[str] = mapped_column(
         String(100), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(1000), nullable=False)
+
+
+admin = User(
+    id=1, name="Wenqian Li",
+    email="/",
+    password="/"
+)
 
 
 class BlogPost(db.Model):
@@ -103,17 +111,12 @@ class Projects(db.Model):
 class Courses(db.Model):
     __tablename__ = "courses"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    title: Mapped[str] = mapped_column(
+    name: Mapped[str] = mapped_column(
         String(250), unique=True, nullable=False)
     category: Mapped[str] = mapped_column(
         String(250), unique=True, nullable=False)
-    course_name: Mapped[str] = mapped_column(
-        String(250), unique=True, nullable=False)
-    overview: Mapped[str] = mapped_column(
-        String(500), unique=True, nullable=False)
-    skill_tags: Mapped[str] = mapped_column(Text, nullable=False)
-    course_url: Mapped[str] = mapped_column(String(500), nullable=False)
-    img_url: Mapped[str] = mapped_column(String(250), nullable=False)
+    description: Mapped[str] = mapped_column(Text, nullable=True)
+    url: Mapped[str] = mapped_column(String(500), nullable=True)
     projects = relationship(
         "Projects", back_populates="course", cascade="all, delete-orphan")
     # # foreign table.field
@@ -138,7 +141,12 @@ class Courses(db.Model):
 
 with app.app_context():
     # db.drop_all()
+    # Projects.__table__.drop(db.engine)
+    # Courses.__table__.drop(db.engine)
+
     db.create_all()
+    # db.session.add(admin)
+    # db.session.commit()
 
 # with app.app_context():
 #     # Create a mock post
@@ -157,7 +165,36 @@ with app.app_context():
 def home():
     # return render_template('index.html', current_user_id=current_user.id)
     # todo: change later for testing purpose only
-    return render_template('index.html', current_user_id=2)
+    return render_template('index.html', logged_in=current_user.is_authenticated)
+
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    from forms import LoginForm
+
+    loginForm = LoginForm()
+    if loginForm.validate_on_submit():
+        email = loginForm.email.data
+        password = loginForm.password.data
+        with app.app_context():
+            user = db.session.execute(
+                db.select(User).where(User.email == email)).scalar()
+            if not user:
+                flash("This email is not registered. Please try again.")
+                return redirect(url_for('login'))
+            elif user.password != password:
+                flash("Incorrect password. Please try again.")
+                return redirect(url_for('login'))
+            elif user.password == password:
+                login_user(user)
+                return redirect(url_for("home"))
+    return render_template("admin-login.html", form=loginForm, logged_in=current_user.is_authenticated)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 
 @app.route('/contact')
@@ -169,7 +206,7 @@ def contact():
 def blogs():
     result = db.session.execute(db.select(BlogPost))
     posts = result.scalars().all()
-    return render_template("blogs.html", all_posts=posts)
+    return render_template("blogs.html", all_posts=posts, logged_in=current_user.is_authenticated)
 
 
 @app.route("/post/<int:post_id>",  methods=["GET", "POST"])
@@ -190,12 +227,12 @@ def show_post(post_id):
     #         return redirect(url_for('login'))
     # comments = db.session.execute(db.select(Comment).where(
     # Comment.post_id == post_id)).scalars()
-    return render_template("post.html", post=requested_post)
+    return render_template("post.html", post=requested_post, logged_in=current_user.is_authenticated)
 
 
 @app.route('/resume')
 def resume():
-    return render_template('resume.html')
+    return render_template('resume.html', logged_in=current_user.is_authenticated)
 
 
 @app.route('/download')
@@ -210,7 +247,7 @@ def download():
 
 @app.route('/skills')
 def skills():
-    return render_template('technicalskill.html')
+    return render_template('technicalskill.html', logged_in=current_user.is_authenticated)
 
 
 @app.route('/view-course-project/<int:id>', methods=["GET", "POST"])
@@ -218,7 +255,7 @@ def view_course(id):
     requested_course = db.get_or_404(Courses, id)
     projects = db.session.execute(db.select(Projects).where(
         Projects.course_id == id)).scalars().all()
-    return render_template("coursespecific.html", course=requested_course, projects=projects)
+    return render_template("coursespecific.html", course=requested_course, projects=projects, logged_in=current_user.is_authenticated)
 
 
 @app.route('/view-project/<category>', methods=["GET", "POST"])
@@ -226,24 +263,25 @@ def view_project(category):
     # result = db.session.execute(db.select(Projects).where(
     #     Projects.category == category)).scalars().all()
     # return render_template("viewproject.html", projects=result, category=category)
-    return render_template("viewproject.html", category=category)
+    return render_template("viewproject.html", category=category, logged_in=current_user.is_authenticated)
 
 
 @app.route('/project/<int:id>', methods=["GET", "POST"])
 def project(id):
     requested_post = db.get_or_404(Projects, id)
-    return render_template("project.html", project=requested_post)
+    return render_template("project.html", project=requested_post, logged_in=current_user.is_authenticated)
 
 
 @app.route("/new-project", methods=["GET", "POST"])
 @admin_only
 def add_new_project():
-
+    from forms import CreateProjectForm
     form = CreateProjectForm()
     if form.validate_on_submit():
         new_proj = Projects(
             title=form.title.data,
             category=form.category.data,
+            course_id=form.course_id.data,  # Use course_id from the form
             course_name=form.course_name.data,
             result_link=form.result_link.data,
             overview=form.overview.data,
@@ -255,8 +293,30 @@ def add_new_project():
         )
         db.session.add(new_proj)
         db.session.commit()
-        # return redirect(url_for("get_all_posts"))
-    return render_template("make-post.html", form=form, logged_in=current_user.is_authenticated)
+        # todo: add proper redicte
+        return redirect(url_for("home"))
+    return render_template("make_project.html", form=form, logged_in=current_user.is_authenticated)
+
+
+@app.route("/new-course", methods=["GET", "POST"])
+@admin_only
+def add_new_course():
+
+    from forms import CreateCourseForm
+
+    form = CreateCourseForm()
+    if form.validate_on_submit():
+        new_course = Courses(
+            name=form.name.data,
+            category=form.category.data,
+            description=form.description.data,
+            url=form.url.data
+        )
+        db.session.add(new_course)
+        db.session.commit()
+        # todo: add proper redicte
+        return redirect(url_for("home"))
+    return render_template("make_course.html", form=form, logged_in=current_user.is_authenticated)
 
 
 if __name__ == '__main__':
