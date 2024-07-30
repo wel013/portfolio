@@ -15,126 +15,115 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import hashlib
 from urllib.parse import urlencode
 import os
-from flask import render_template, redirect, url_for, flash, abort
-from . import db, admin_only
-from .forms import ProjectForm
-from .models import Projects
-from flask_login import current_user
-from flask import current_app as app
 
 
 class Base(DeclarativeBase):
     pass
 
 
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///posts.db"
-# app.config['SECRET_KEY'] = "SECRET_KEY"
-# db = SQLAlchemy(model_class=Base)
-# db.init_app(app)
-# ckeditor = CKEditor(app)
-# Bootstrap5(app)
-# login_manager = LoginManager()
-# login_manager.init_app(app)
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///posts.db"
+app.config['SECRET_KEY'] = "SECRET_KEY"
+db = SQLAlchemy(model_class=Base)
+db.init_app(app)
+ckeditor = CKEditor(app)
+Bootstrap5(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return db.get_or_404(User, user_id)
+@login_manager.user_loader
+def load_user(user_id):
+    return db.get_or_404(User, user_id)
 
 
-# def admin_only(f):
-#     @wraps(f)
-#     def wrapped(*args, **kwargs):
-#         if current_user.id == 1:
-#             return f(*args, **kwargs)
-#         else:
-#             return abort(403)
-#     return wrapped
+def admin_only(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        if current_user.id == 1:
+            return f(*args, **kwargs)
+        else:
+            return abort(403)
+    return wrapped
 
 
-# class User(UserMixin, db.Model):
-#     __tablename__ = "users"
-#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-#     name: Mapped[str] = mapped_column(
-#         String(100), unique=True, nullable=False)
-#     email: Mapped[str] = mapped_column(
-#         String(100), nullable=False, unique=True)
-#     password: Mapped[str] = mapped_column(String(1000), nullable=False)
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(
+        String(100), unique=True, nullable=False)
+    email: Mapped[str] = mapped_column(
+        String(100), nullable=False, unique=True)
+    password: Mapped[str] = mapped_column(String(1000), nullable=False)
 
 
-# admin = User(
-#     id=1, name="Wenqian Li",
-#     email="/",
-#     password="/"
-# )
+admin = User(
+    id=1, name="Wenqian Li",
+    email="liwq@umich.edu",
+    password="Iqoc1vot#"
+)
 
 
-# class BlogPost(db.Model):
-#     __tablename__ = "blog_posts"
-#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-#     title: Mapped[str] = mapped_column(
-#         String(250), unique=True, nullable=False)
-#     topic: Mapped[str] = mapped_column(String(250), nullable=False)
-#     date: Mapped[str] = mapped_column(String(250), nullable=False)
-#     body: Mapped[str] = mapped_column(Text, nullable=False)
-#     author: Mapped[str] = mapped_column(String(250), nullable=False)
-#     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
-#     # # foreign table.field
-#     # author_id: Mapped[int] = mapped_column(
-#     #     Integer, ForeignKey('users.id'))
-#     # author = relationship("User", back_populates='posts')
+class BlogPost(db.Model):
+    __tablename__ = "blog_posts"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    title: Mapped[str] = mapped_column(
+        String(250), nullable=False)
+    topic: Mapped[str] = mapped_column(String(250), nullable=False)
+    date: Mapped[str] = mapped_column(String(250), nullable=False)
+    body: Mapped[str] = mapped_column(Text, nullable=False)
+    author: Mapped[str] = mapped_column(String(250), nullable=False)
+    img_url: Mapped[str] = mapped_column(String(250), nullable=False)
+    # # foreign table.field
+    # author_id: Mapped[int] = mapped_column(
+    #     Integer, ForeignKey('users.id'))
+    # author = relationship("User", back_populates='posts')
 
 
-# class Projects(db.Model):
-#     __tablename__ = "projects"
-#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-#     title: Mapped[str] = mapped_column(
-#         String(250), unique=True, nullable=False)
-#     category: Mapped[str] = mapped_column(
-#         String(250), unique=True, nullable=False)
-#     course_name: Mapped[str] = mapped_column(
-#         String(250), unique=True, nullable=False)
-#     result_link: Mapped[str] = mapped_column(
-#         String(500), unique=True, nullable=False)
-#     overview: Mapped[str] = mapped_column(
-#         String(500), unique=True, nullable=False)
-#     key_components: Mapped[str] = mapped_column(Text, nullable=False)
-#     achievements: Mapped[str] = mapped_column(Text, nullable=False)
-#     skill_tags: Mapped[str] = mapped_column(Text, nullable=False)
-#     course_url: Mapped[str] = mapped_column(String(500), nullable=False)
-#     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
-#     course_id: Mapped[int] = mapped_column(
-#         Integer, ForeignKey('courses.id'), nullable=False)
+class Projects(db.Model):
+    __tablename__ = "projects"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    title: Mapped[str] = mapped_column(
+        String(250), nullable=False)
+    category: Mapped[str] = mapped_column(
+        String(250), nullable=False)
+    course_name: Mapped[str] = mapped_column(
+        String(250), nullable=False)
+    result_link: Mapped[str] = mapped_column(
+        String(500), nullable=False)
+    overview: Mapped[str] = mapped_column(
+        String(500), nullable=False)
+    key_components: Mapped[str] = mapped_column(Text, nullable=False)
+    achievements: Mapped[str] = mapped_column(Text, nullable=False)
+    skill_tags: Mapped[str] = mapped_column(Text, nullable=False)
+    course_url: Mapped[str] = mapped_column(String(500), nullable=False)
+    img_url: Mapped[str] = mapped_column(String(250), nullable=False)
+    course_id: Mapped[int] = mapped_column(
+        Integer, ForeignKey('courses.id'), nullable=False)
 
-#     course = relationship("Courses", back_populates="projects")
-#     # # foreign table.field
-#     # author_id: Mapped[int] = mapped_column(
-#     #     Integer, ForeignKey('users.id'))
-#     # author = relationship("User", back_populates='posts')
-
-
-# class Courses(db.Model):
-#     __tablename__ = "courses"
-#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-#     name: Mapped[str] = mapped_column(
-#         String(250), unique=True, nullable=False)
-#     category: Mapped[str] = mapped_column(
-#         String(250), unique=True, nullable=False)
-#     description: Mapped[str] = mapped_column(Text, nullable=True)
-#     url: Mapped[str] = mapped_column(String(500), nullable=True)
-#     projects = relationship(
-#         "Projects", back_populates="course", cascade="all, delete-orphan")
-#     # # foreign table.field
-#     # author_id: Mapped[int] = mapped_column(
-#     #     Integer, ForeignKey('users.id'))
-#     # author = relationship("User", back_populates='posts')
+    course = relationship("Courses", back_populates="projects")
+    # # foreign table.field
+    # author_id: Mapped[int] = mapped_column(
+    #     Integer, ForeignKey('users.id'))
+    # author = relationship("User", back_populates='posts')
 
 
-# def get_course_list():
-#     courses = db.session.query(Courses).all()
-#     course_list = [(course.id, course.name) for course in courses]
-#     return course_list
+class Courses(db.Model):
+    __tablename__ = "courses"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(
+        String(250), unique=False, nullable=False)
+    category: Mapped[str] = mapped_column(
+        String(250), unique=False, nullable=False)
+    description: Mapped[str] = mapped_column(Text, nullable=True)
+    url: Mapped[str] = mapped_column(String(500), nullable=True)
+    projects = relationship(
+        "Projects", back_populates="course", cascade="all, delete-orphan")
+    # # foreign table.field
+    # author_id: Mapped[int] = mapped_column(
+    #     Integer, ForeignKey('users.id'))
+    # author = relationship("User", back_populates='posts')
+
 
 # Define a function to create a mock post
 
@@ -148,15 +137,22 @@ class Base(DeclarativeBase):
 #         img_url="https://images.unsplash.com/photo-1708162665956-98da095550ea?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 #     )
 #     return mock_post
+def get_course_list():
+    courses = db.session.query(Courses).all()
+    course_list = [(course.id, course.name) for course in courses]
+    return course_list
 
 
-# with app.app_context():
+courses = []
+with app.app_context():
     # db.drop_all()
     # Projects.__table__.drop(db.engine)
     # Courses.__table__.drop(db.engine)
 
-    # db.create_all()
+    db.create_all()
     # db.session.add(admin)
+    # print("Admin added")
+    courses = get_course_list()
     # db.session.commit()
 
 # with app.app_context():
@@ -181,7 +177,7 @@ def home():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    from app.forms import LoginForm
+    from forms import LoginForm
 
     loginForm = LoginForm()
     if loginForm.validate_on_submit():
@@ -286,7 +282,7 @@ def project(id):
 @app.route("/new-project", methods=["GET", "POST"])
 @admin_only
 def add_new_project():
-    from app.forms import CreateProjectForm
+    from forms import CreateProjectForm
     form = CreateProjectForm()
     if form.validate_on_submit():
         new_proj = Projects(
@@ -313,7 +309,7 @@ def add_new_project():
 @admin_only
 def add_new_course():
 
-    from app.forms import CreateCourseForm
+    from forms import CreateCourseForm
 
     form = CreateCourseForm()
     if form.validate_on_submit():
@@ -330,5 +326,5 @@ def add_new_course():
     return render_template("make_course.html", form=form, logged_in=current_user.is_authenticated)
 
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
