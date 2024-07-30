@@ -56,11 +56,12 @@ class User(UserMixin, db.Model):
         String(100), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(1000), nullable=False)
 
+# this password is fake
 
 admin = User(
     id=1, name="Wenqian Li",
     email="liwq@umich.edu",
-    password="Iqoc1vot#"
+    password="fake password"
 )
 
 
