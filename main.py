@@ -256,6 +256,8 @@ def download():
 def skills():
     return render_template('technicalskill.html', logged_in=current_user.is_authenticated)
 
+# level 2: under each category this page will list all the courses that is within
+
 
 @app.route('/view-course-project/<int:id>', methods=["GET", "POST"])
 def view_course(id):
@@ -264,15 +266,19 @@ def view_course(id):
         Projects.course_id == id)).scalars().all()
     return render_template("coursespecific.html", course=requested_course, projects=projects, logged_in=current_user.is_authenticated)
 
+# level 1 view categories: within this category, show all courses
+
 
 @app.route('/view-project/<category>', methods=["GET", "POST"])
 def view_project(category):
+    courses = db.session.query(Courses).all()
     # result = db.session.execute(db.select(Projects).where(
     #     Projects.category == category)).scalars().all()
     # return render_template("viewproject.html", projects=result, category=category)
-    return render_template("viewproject.html", category=category, logged_in=current_user.is_authenticated)
+    return render_template("viewproject.html", category=category, logged_in=current_user.is_authenticated, courses=courses)
 
 
+# level 3: view a single project
 @app.route('/project/<int:id>', methods=["GET", "POST"])
 def project(id):
     requested_post = db.get_or_404(Projects, id)

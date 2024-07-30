@@ -37,13 +37,17 @@ which means you can only create a course ifyou created a course
 also i can leave a special index for self projects that does not come from any projects (like tthe personal ones)
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-Self Project -> List all the projects -> indiv projects
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 7/29
-my project form is not working correctly due to i want to have a drop down to selece courses but the imports are not working roght
+my project form is not working correctly due to i want to have a drop down to selece courses but the imports are not working right (✅)
+
+7/30 
+tentative organization idea
+Self Project(three categories) -> list of all the courses in that category-> List all the projects -> indiv projects
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 Future: 
 need to add a form a insert project/courses; and make sure to not mess up the relationships in the db

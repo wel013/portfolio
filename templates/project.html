@@ -18,26 +18,26 @@
         <h4>Overview</h4>
         <hr class="left-aligned-hr">
 
-        <p>{{project.overview}}
+        <p>{{ project.overview | safe }}
         </p>
     </div>
     <div>
         <h4>Key Components</h4>
         <hr class="left-aligned-hr">
-        {{project.key_components}}
+       {{ project.key_components | safe }}
     </div>
 
 
     <div>
         <h4>Achievements</h4>
         <hr class="left-aligned-hr">
-        {{project.achievements}}
+       {{ project.achievements | safe }}
     </div>
 
     <div>
         <h4>Technologies & Skills:</h4>
         <hr class="left-aligned-hr">
-        <p>{{project.skill_tags}}
+        <p>{{project.skill_tags|safe}}
         </p>
     </div>
 
@@ -45,6 +45,7 @@
         <h4>Links</h4>
         <hr class="left-aligned-hr">
         <p>{{project.course_url}}</p>
+         <a href="{{ project.result_link }}" target="_blank">See results</a>
     </div>
     <p>Due to honor code and confidentiality agreements, I am unable to showcase specific code publicly. For further
         details or
