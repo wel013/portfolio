@@ -46,8 +46,10 @@ my project form is not working correctly due to i want to have a drop down to se
 
 7/30 
 tentative organization idea
-Self Project(three categories) -> list of all the courses in that category-> List all the projects -> indiv projects
+Self Project(three categories) -> list of all the courses in that category-> List all the projects -> indiv projects(✅)
 
+7/31
+need to style project view page for individual project
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 Future: 
 need to add a form a insert project/courses; and make sure to not mess up the relationships in the db
