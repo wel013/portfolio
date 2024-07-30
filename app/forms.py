@@ -2,9 +2,16 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditorField
-from main import Courses
+from app.main import get_course_list
+from .models import Courses
+from . import db
 
 
+def get_course_list():
+    with db.engine.connect() as connection:
+        courses = connection.execute(db.select(Courses)).all()
+        course_list = [(course.id, course.name) for course in courses]
+        return course_list
 class CreateProjectForm(FlaskForm):
     title = StringField("Project Title", validators=[DataRequired()])
     category = SelectField(
@@ -13,7 +20,8 @@ class CreateProjectForm(FlaskForm):
                  ('Self_Directed', 'Self Directed')],
         validators=[DataRequired()]
     )
-    course_id = SelectField("Course", coerce=int, validators=[DataRequired()])
+    course_id = SelectField('SCourse', choices=get_course_list(
+    ), coerce=int, validators=[DataRequired()])
     course_name = StringField("From Which Course", validators=[DataRequired()])
     course_url = StringField("URL to That Course", validators=[])
     result_link = StringField("Link to Any Result", validators=[URL()])
@@ -26,11 +34,6 @@ class CreateProjectForm(FlaskForm):
         "Your Achievements", validators=[DataRequired()])
     skill_tags = StringField("Skill Tags", validators=[DataRequired()])
     submit = SubmitField("Submit Project")
-
-    def __init__(self, *args, **kwargs):
-        super(CreateProjectForm, self).__init__(*args, **kwargs)
-        self.course_id.choices = [(course.id, course.name)
-                                  for course in Courses.query.all()]
 
 
 class CreateCourseForm(FlaskForm):
