@@ -58,6 +58,7 @@ class User(UserMixin, db.Model):
 
 # this password is fake
 
+
 admin = User(
     id=1, name="Wenqian Li",
     email="liwq@umich.edu",
