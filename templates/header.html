@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Grayscale - Start Bootstrap Theme</title>
+    <title>{{logged_in}}</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -34,13 +34,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('home')}}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#signup">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('skills')}}">Skills</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="{{url_for('resume')}}">Resume</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url_for('blogs')}}">Blog</a></li>
+                    {%if not logged_in%}
+
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">Admin Log In</a></li>
+                    {%endif%}
+
+                    {%if logged_in%}
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('add_new_project')}}">Add Project</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url_for('add_new_course')}}">Add Course</a></li>
+                    
+                    {%endif%}
+
                 </ul>
             </div>
         </div>

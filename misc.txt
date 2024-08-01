@@ -1,3 +1,13 @@
+############################################
+8/1 
+In this branch I will try to build a drop down 
+system for filtering projects based on the tags
+1. build a page that randomly displays 4 projects
+so that the page does not look too empty
+2. build a search bar/drop down to filter out the
+projects, once the search result returns, display those
+projects
+
 Used to track outside sources used: 
 Templates and inspirations: 
 https://startbootstrap.com/previews/grayscale

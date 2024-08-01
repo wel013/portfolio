@@ -1,0 +1,38 @@
+{% from "bootstrap5/form.html" import render_form %} 
+{% include "header.html" %}
+<!-- Page Header-->
+
+
+<header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <h1 class="mx-auto my-0 text-uppercase">Admin Log In</h1>
+
+            </div>
+        </div>
+    </div>
+</header>
+<main class="mb-4">
+  <div class="container">
+    <div class="row">
+      <br>
+      <p class="text-bg-primary">
+        This page is used by the admin of the website to manage the content, you do not need to log in to view the information about the website
+      </p>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+            <p class="flash">{{ message }}</p>  
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {{render_form(form, novalidate=True, button_map={"submit": "primary"})}}        
+      </div>
+    </div>
+  </div>
+</main>
+
+
+{% include "footer.html" %}
