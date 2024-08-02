@@ -360,11 +360,16 @@ def filter_projects():
     # Update form choices dynamically
     # form.tag.choices += [(tag, tag.capitalize()) for tag in unique_tags]
 
-    # if form.validate_on_submit():
-    #     selected_tag = form.tag.data
-    #     # Handle the filtering logic here
-    #     # projects = get_projects_by_tag(selected_tag)
-    #     return render_template('filtered-projects.html', projects=projects)
+    if form.validate_on_submit():
+        input_tag = form.tag.data
+        selected_tag = f'#{input_tag}'
+        # Handle the filtering logic here
+        projects = db.session.execute(
+            db.select(Projects).filter(Projects.skill_tags.like(f'%{selected_tag}%'))).scalars().all()
+        for project in projects:
+            print(project.title)
+        # redirect()
+        return render_template('filter-project.html', projects=projects, form=form, logged_in=current_user.is_authenticated)
 
     return render_template('filter-project.html', form=form, logged_in=current_user.is_authenticated)
 
