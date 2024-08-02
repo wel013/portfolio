@@ -20,25 +20,20 @@
  <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 3rem">
 <h1>Filtered Projects</h1>
  </div>
-<ul>
+<ul class='list-inline'>
     {% for project in projects %}
-<div class="row row-cols-1 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-3 align-items-stretch g-4 py-5 mx-3" >
-    <a href="{{url_for('project', id = project.id)}}" target="_blank">
-        <div class="col">
-            <!-- <a href="#" style="text-decoration: none;"> -->
+    <li class="col">
+        <a href="{{ url_for('project', id=project.id) }}" target="_blank" style="text-decoration: none;">
             <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                style="background-image: url('./images/unsplash-photo-4.jpg'); background-size: contain">
+                style="background-image: url('./images/unsplash-photo-4.jpg'); background-size: cover; background-position: center;">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                     <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ project.title }}</h3>
                     <p>{{ project.overview | safe }}</p>
-                    <!--todo: link to individual project page-->
                 </div>
             </div>
-            <!-- </a> -->
-        </div>
-    </a>
-</div>
-{%endfor%}
+        </a>
+    </li>
+    {% endfor %}
 </ul>
 {%endif%}
 
