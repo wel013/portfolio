@@ -8,6 +8,9 @@ so that the page does not look too empty
 projects, once the search result returns, display those
 projects
 
+8/2 
+displayed the fetched projects property
+
 Used to track outside sources used: 
 Templates and inspirations: 
 https://startbootstrap.com/previews/grayscale
