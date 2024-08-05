@@ -11,6 +11,9 @@ projects
 8/2 
 displayed the fetched projects property
 
+8/5
+index page link to filter proj page
+
 Used to track outside sources used: 
 Templates and inspirations: 
 https://startbootstrap.com/previews/grayscale
