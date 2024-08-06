@@ -1,0 +1,41 @@
+{% from "bootstrap5/form.html" import render_form %} 
+{% include "header.html" %}
+
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="text-center">
+                    <h1 class="mx-auto my-0 text-uppercase">Filter Projects</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+ <div class="col-lg-8 col-md-10 mx-auto mb-5" style="margin-top: 3rem; margin-bottom:10px">
+        {{render_form(form, novalidate=True, button_map={"submit": "primary"})}}        
+      </div>
+
+
+{%if projects%}
+ <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 3rem">
+<h1>Filtered Projects</h1>
+ </div>
+<ul class='list-inline'>
+    {% for project in projects %}
+    <li class="col">
+        <a href="{{ url_for('project', id=project.id) }}" target="_blank" style="text-decoration: none;">
+            <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                style="background-image: url('./images/unsplash-photo-4.jpg'); background-size: cover; background-position: center;">
+                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{ project.title }}</h3>
+                    <p>{{ project.overview | safe }}</p>
+                </div>
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{%endif%}
+
+
+{% include "footer.html" %}

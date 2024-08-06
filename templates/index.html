@@ -1,46 +1,46 @@
 {% include "header.html" %}
-    <!-- Masthead-->
-    <header class="masthead">
-        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-            <div class="d-flex justify-content-center">
-                <div class="text-center">
-                    <h1 class="mx-auto my-0 text-uppercase">Wenqian's Portofolio</h1>
-                    <h2 class="text-white-50 mx-auto mt-2 mb-5">Hi there! I'm Wenqian, a Computer Science + Data Science
-                        student at the University of Michigan.
-                        I'm passionate about
-                        AI, machine learning, and web development. On this website, you can explore my projects, past
-                        accomplishments, and personal blogs about current technology trends.</h2>
-                    <a class="btn btn-primary" href="#about">Get Started</a>
-                </div>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <h1 class="mx-auto my-0 text-uppercase">Wenqian's Portofolio</h1>
+                <h2 class="text-white-50 mx-auto mt-2 mb-5">Hi there! I'm Wenqian, a Computer Science + Data Science
+                    student at the University of Michigan.
+                    I'm passionate about
+                    AI, machine learning, and web development. On this website, you can explore my projects, past
+                    accomplishments, and personal blogs about current technology trends.</h2>
+                <a class="btn btn-primary" href="#about">Get Started</a>
             </div>
         </div>
-    </header>
-    <!-- About-->
-    <section class="about-section text-center" id="about">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-8">
-                    <!-- <h2 class="text-white mb-4">Wenqian's Portfolio</h2> -->
-                    <p class="text-white-50">
-                        My past projects are listed in the Project section, to view a full list of them, please click on
-                        view more.
-                        My resume is downloadable in the resume section.
-                        If you want to see the most current technology trends and have opionions on them, please visit
-                        the blog section and leave me a message!
-                    </p>
-                </div>
+    </div>
+</header>
+<!-- About-->
+<section class="about-section text-center" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8">
+                <!-- <h2 class="text-white mb-4">Wenqian's Portfolio</h2> -->
+                <p class="text-white-50">
+                    My past projects are listed in the Project section, to view a full list of them, please click on
+                    view more.
+                    My resume is downloadable in the resume section.
+                    If you want to see the most current technology trends and have opionions on them, please visit
+                    the blog section and leave me a message!
+                </p>
             </div>
-
-
-
-            <!-- <img class="img-fluid" src="{{ url_for('static', filename='assets/img/about.jpg') }}" alt="..." /> -->
         </div>
-    </section>
 
-    <!--########################################Projects###################################################-->
-    <!-- Projects-->
-    <section class="projects-section bg-light" id="projects">
-       <!-- <div class="container px-4 px-lg-5">
+
+
+        <!-- <img class="img-fluid" src="{{ url_for('static', filename='assets/img/about.jpg') }}" alt="..." /> -->
+    </div>
+</section>
+
+<!--########################################Projects###################################################-->
+<!-- Projects-->
+<section class="projects-section bg-light" id="projects">
+    <!-- <div class="container px-4 px-lg-5">
             Featured Project Row
             <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
                 <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0"
@@ -53,146 +53,155 @@
                     </div>
                 </div>
             </div>-->
-             <div class="container px-4 px-lg-5">
-            <!-- Featured Project Row-->
-            <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0"
-                        src="{{ url_for('static', filename='assets/img/bg-masthead.jpg') }}" alt="..." /></div>
-                <div class="col-xl-4 col-lg-5">
-                    <div class="featured-text text-center text-lg-left">
-                        <a href="{{ url_for('view_project', category='self') }}"><h4 class="text-black">Self Directed Learning</h4></a>
+    <div class="container px-4 px-lg-5">
+        <!-- Featured Project Row-->
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+            <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0"
+                    src="{{ url_for('static', filename='assets/img/bg-masthead.jpg') }}" alt="..." /></div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="featured-text text-center text-lg-left">
+                    <a href="{{ url_for('view_project', category='self') }}">
+                        <h4 class="text-black">Self Directed Learning</h4>
+                    </a>
 
-                        <p class="text-black-50 mb-0">A compilation of online courses and resources that reflects 
-                            my commitment to continuous learning and skill development outside formal education."</p>
-                    </div>
+                    <p class="text-black-50 mb-0">A compilation of online courses and resources that reflects
+                        my commitment to continuous learning and skill development outside formal education."</p>
                 </div>
             </div>
-            <!-- Project One Row-->
-            <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                <div class="col-lg-6"><img class="img-fluid"
-                        src="{{ url_for('static', filename='assets/img/demo-image-01.jpg') }}" alt="..." /></div>
-                <div class="col-lg-6">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <a href="{{ url_for('view_project', category='academic') }}"><h4 class="text-white">School Projects</h4></a>
-                                <p class="mb-0 text-white-50">A showcase of academic projects demonstrating 
-                                    applied knowledge and skills developed during my studies.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Project Two Row-->
-            <div class="row gx-0 justify-content-center">
-                <div class="col-lg-6"><img class="img-fluid"
-                        src="{{ url_for('static', filename='assets/img/demo-image-02.jpg') }}" alt="..." /></div>
-                <div class="col-lg-6 order-lg-first">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-right">
-                                <a href="{{ url_for('view_project', category='personal') }}"><h4 class="text-white">Personal Projects</h4></a>
-                                <p class="mb-0 text-white-50">A collection of independent projects and project-based online courses that highlight my creativity, 
-                            initiative, and practical expertise beyond formal education.</p>
-                            </div>
+        </div>
+        <!-- Project One Row-->
+        <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+            <div class="col-lg-6"><img class="img-fluid"
+                    src="{{ url_for('static', filename='assets/img/demo-image-01.jpg') }}" alt="..." /></div>
+            <div class="col-lg-6">
+                <div class="bg-black text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-left">
+                            <a href="{{ url_for('view_project', category='academic') }}">
+                                <h4 class="text-white">School Projects</h4>
+                            </a>
+                            <p class="mb-0 text-white-50">A showcase of academic projects demonstrating
+                                applied knowledge and skills developed during my studies.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-       
-    </section>
-
-        
-
-    <!-- Signup-->
-    <!--#######################################################################################################################-->
-    <section class="signup-section" id="signup">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <h2 class="text-white mb-5">Want to get in touch? Fill out the form below to send me a message!</h2>
-                    <div class="my-5">
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * Simplified SB Contact Form for the Tutorial* *-->
-                        <form id="contactForm" name="sentMessage" action="{{ url_for('contact') }}" method="post">
-                            <div class="form-signup">
-                                <label for="name" class="form-label">Name</label>
-
-                                <input class="form-control" id="name" name="name" type="text"
-                                    placeholder="Enter your name..." required />
-                            </div>
-                            <div class="form-signup">
-                                <label for="email" class="form-label">Email address</label>
-
-                                <input class="form-control" id="email" name="email" type="email"
-                                    placeholder="Enter your email..." required />
-                            </div>
-                            <div class="form-signup">
-                                <label for="phone" class="form-label">Phone Number</label>
-
-                                <input class="form-control" id="phone" name="phone" type="tel"
-                                    placeholder="Enter your phone number..." required />
-                            </div>
-                            <div class="form-signup">
-                                <label for="message" class="form-label">Message</label>
-
-                                <textarea class="form-control" id="message" name="message"
-                                    placeholder="Enter your message here..." required style="height: 12rem"></textarea>
-                            </div>
-                            <br />
-                            <!--TODO: update the button actions-->
-                            <button class="btn btn-danger text-uppercase" id="submitButton" type="submit">
-                                Send!
-                            </button>
-                        </form>
+        <!-- Project Two Row-->
+        <div class="row gx-0 justify-content-center">
+            <div class="col-lg-6"><img class="img-fluid"
+                    src="{{ url_for('static', filename='assets/img/demo-image-02.jpg') }}" alt="..." /></div>
+            <div class="col-lg-6 order-lg-first">
+                <div class="bg-black text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-right">
+                            <a href="{{ url_for('view_project', category='personal') }}">
+                                <h4 class="text-white">Personal Projects</h4>
+                            </a>
+                            <p class="mb-0 text-white-50">A collection of independent projects and project-based online
+                                courses that highlight my creativity,
+                                initiative, and practical expertise beyond formal education.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!--#######################################################################################################################-->
+    </div>
+    <p class="mb-0 text-black-50 gx-0 text-center" style="margin-top: 2rem;">Want to see projects that uses a specific
+        skill: <a href="{{ url_for('filter_projects') }}">Filter Projects</a>
+    </p>
+</section>
 
-    <!-- Contact-->
-    <section class="contact-section bg-black">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5">
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Github</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50">https://github.com/wel013</div>
+
+
+<!-- Signup-->
+<!--#######################################################################################################################-->
+<section class="signup-section" id="signup">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h2 class="text-white mb-5">Want to get in touch? Fill out the form below to send me a message!</h2>
+                <div class="my-5">
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- * * Simplified SB Contact Form for the Tutorial* *-->
+                    <form id="contactForm" name="sentMessage" action="{{ url_for('contact') }}" method="post">
+                        <div class="form-signup">
+                            <label for="name" class="form-label">Name</label>
+
+                            <input class="form-control" id="name" name="name" type="text"
+                                placeholder="Enter your name..." required />
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-envelope text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Email</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50"><a href="#!">liwq@umich.edu</a></div>
+                        <div class="form-signup">
+                            <label for="email" class="form-label">Email address</label>
+
+                            <input class="form-control" id="email" name="email" type="email"
+                                placeholder="Enter your email..." required />
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Phone</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50">+1 (626) 560-4141</div>
+                        <div class="form-signup">
+                            <label for="phone" class="form-label">Phone Number</label>
+
+                            <input class="form-control" id="phone" name="phone" type="tel"
+                                placeholder="Enter your phone number..." required />
                         </div>
-                    </div>
+                        <div class="form-signup">
+                            <label for="message" class="form-label">Message</label>
+
+                            <textarea class="form-control" id="message" name="message"
+                                placeholder="Enter your message here..." required style="height: 12rem"></textarea>
+                        </div>
+                        <br />
+                        <!--TODO: update the button actions-->
+                        <button class="btn btn-danger text-uppercase" id="submitButton" type="submit">
+                            Send!
+                        </button>
+                    </form>
                 </div>
-            </div>
-            <div class="social d-flex justify-content-center">
-                <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
             </div>
         </div>
-    </section>
-   {% include "footer.html" %}
+    </div>
+</section>
+<!--#######################################################################################################################-->
+
+<!-- Contact-->
+<section class="contact-section bg-black">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Github</h4>
+                        <hr class="my-4 mx-auto" />
+                        <div class="small text-black-50">https://github.com/wel013</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Email</h4>
+                        <hr class="my-4 mx-auto" />
+                        <div class="small text-black-50"><a href="#!">liwq@umich.edu</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                        <h4 class="text-uppercase m-0">Phone</h4>
+                        <hr class="my-4 mx-auto" />
+                        <div class="small text-black-50">+1 (626) 560-4141</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social d-flex justify-content-center">
+            <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+            <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+            <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+        </div>
+    </div>
+</section>
+{% include "footer.html" %}

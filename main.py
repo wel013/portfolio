@@ -1,5 +1,6 @@
+from flask import render_template
 from datetime import datetime
-from flask import Flask, abort, render_template, redirect, url_for, flash, send_from_directory
+from flask import Flask, abort, render_template, redirect, url_for, flash, send_from_directory, request
 from datetime import date
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
@@ -11,7 +12,7 @@ from sqlalchemy import Integer, String, Text, ForeignKey
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 # Import your forms from the forms.py
-# from forms import CreateProjectForm, LoginForm, CreateCourseForm
+# from forms import CreateProjectForm, LoginForm, CreateCourseForm, FilterProjectsForm
 import hashlib
 from urllib.parse import urlencode
 import os
@@ -145,7 +146,21 @@ def get_course_list():
     return course_list
 
 
+def get_unique_tags():
+    projects = Projects.query.all()
+    all_tags = set()
+    for project in projects:
+        tags = project.skill_tags.split()
+        for tag in tags:
+            if tag.strip('#').lower() == " ":
+                pass
+            else:
+                all_tags.add(tag.strip('#').lower())
+    return sorted(all_tags)  # Sort tags alphabetically
+
+
 courses = []
+unique_tags = set()
 with app.app_context():
     # db.drop_all()
     # Projects.__table__.drop(db.engine)
@@ -155,6 +170,8 @@ with app.app_context():
     # db.session.add(admin)
     # print("Admin added")
     courses = get_course_list()
+
+    unique_tags = get_unique_tags()
     # db.session.commit()
 
 # with app.app_context():
@@ -332,6 +349,29 @@ def add_new_course():
         # todo: add proper redicte
         return redirect(url_for("home"))
     return render_template("make_course.html", form=form, logged_in=current_user.is_authenticated)
+
+
+@app.route('/filter_projects', methods=['GET', 'POST'])
+def filter_projects():
+    from forms import FilterProjectsForm
+    form = FilterProjectsForm()
+    # This should be your function to get unique tags
+
+    # Update form choices dynamically
+    # form.tag.choices += [(tag, tag.capitalize()) for tag in unique_tags]
+
+    if form.validate_on_submit():
+        input_tag = form.tag.data
+        selected_tag = f'#{input_tag}'
+        # Handle the filtering logic here
+        projects = db.session.execute(
+            db.select(Projects).filter(Projects.skill_tags.like(f'%{selected_tag}%'))).scalars().all()
+        for project in projects:
+            print(project.title)
+        # redirect()
+        return render_template('filter-project.html', projects=projects, form=form, logged_in=current_user.is_authenticated)
+
+    return render_template('filter-project.html', form=form, logged_in=current_user.is_authenticated)
 
 
 if __name__ == '__main__':

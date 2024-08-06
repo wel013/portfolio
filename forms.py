@@ -6,6 +6,10 @@ from flask_ckeditor import CKEditorField
 from main import courses
 
 print(courses)
+from main import courses, unique_tags
+
+# print(courses)
+print(unique_tags)
 
 
 class CreateProjectForm(FlaskForm):
@@ -16,8 +20,8 @@ class CreateProjectForm(FlaskForm):
                  ('Self_Directed', 'Self Directed')],
         validators=[DataRequired()]
     )
-    course_id = SelectField("Course",  choices=courses,
-                            coerce=int, validators=[DataRequired()])
+    course_id = SelectField("Course",  choices=unique_tags,
+                            validators=[DataRequired()])
     course_name = StringField("From Which Course", validators=[DataRequired()])
     course_url = StringField("URL to That Course", validators=[])
     result_link = StringField("Link to Any Result", validators=[URL()])
@@ -28,7 +32,10 @@ class CreateProjectForm(FlaskForm):
         "Project Key Components", validators=[DataRequired()])
     achievements = CKEditorField(
         "Your Achievements", validators=[DataRequired()])
-    skill_tags = StringField("Skill Tags", validators=[DataRequired()])
+    skill_tags = StringField("Skill Tags",
+                             validators=[DataRequired()],
+                             render_kw={"placeholder": "#python #ml"},
+                             description="Enter skills with a '#' followed by the skill name. Separate each skill with a space.")
     submit = SubmitField("Submit Project")
 
 
@@ -56,3 +63,12 @@ class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
     password = StringField("Password", validators=[DataRequired()])
     submit = SubmitField("Log In!")
+
+
+choices = [(tag, tag.capitalize()) for tag in unique_tags]
+
+
+class FilterProjectsForm(FlaskForm):
+    tag = SelectField('Filter Projects by Tag', choices=choices,
+                      validators=[DataRequired()])
+    submit = SubmitField('Search')
